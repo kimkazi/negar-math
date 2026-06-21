@@ -394,25 +394,44 @@ footer{
     </div>
   </div>
 
-  <!-- FORM -->
-  <div class="form-panel">
-    <div class="form-eyebrow">ثبت‌نام در دوره</div>
-    <h2 class="form-h2">اطلاعاتت رو<br/>اینجا بذار</h2>
-    <p class="form-sub">ظرف کمتر از ۲۴ ساعت باهات تماس می‌گیریم.</p>
+<!-- FORM -->
+<div class="form-panel">
+  <div class="form-eyebrow">ثبت‌نام در دوره</div>
+  <h2 class="form-h2">اطلاعاتت رو<br/>اینجا بذار</h2>
+  <p class="form-sub">ظرف کمتر از ۲۴ ساعت باهات تماس می‌گیریم.</p>
+
+  <form id="contactForm" action="https://formspree.io/f/xeebjlkn" method="POST">
 
     <div class="field">
       <label for="name">نام و نام خانوادگی</label>
-      <input type="text" id="name" placeholder="علی احمدی"/>
+      <input
+        type="text"
+        id="name"
+        name="نام و نام خانوادگی"
+        placeholder="علی احمدی"
+        required
+      />
     </div>
 
     <div class="fields-row">
       <div class="field">
         <label for="phone">شماره موبایل</label>
-        <input type="tel" id="phone" placeholder="۰۹۱۲۳۴۵۶۷۸۹"/>
+        <input
+          type="tel"
+          id="phone"
+          name="شماره موبایل"
+          placeholder="۰۹۱۲۳۴۵۶۷۸۹"
+          required
+        />
       </div>
+
       <div class="field">
         <label for="grade">پایه تحصیلی</label>
-        <select id="grade">
+        <select
+          id="grade"
+          name="پایه تحصیلی"
+          required
+        >
           <option value="" disabled selected>انتخاب کن</option>
           <option>دهم</option>
           <option>یازدهم</option>
@@ -423,29 +442,41 @@ footer{
 
     <div class="field">
       <label for="course">درس مورد نظر</label>
-      <select id="course">
+      <select
+        id="course"
+        name="درس مورد نظر"
+        required
+      >
         <option value="" disabled selected>انتخاب کن</option>
+
         <optgroup label="ریاضی">
           <option>ریاضی ۱</option>
           <option>ریاضی ۲</option>
           <option>ریاضی ۳</option>
         </optgroup>
+
         <optgroup label="هندسه">
           <option>هندسه ۱</option>
           <option>هندسه ۲</option>
           <option>هندسه ۳</option>
         </optgroup>
+
         <optgroup label="حسابان">
           <option>حسابان ۱</option>
           <option>حسابان ۲</option>
         </optgroup>
+
         <option>چند درس (توضیح در پیام)</option>
       </select>
     </div>
 
     <div class="field">
       <label for="type">نوع کلاس</label>
-      <select id="type">
+      <select
+        id="type"
+        name="نوع کلاس"
+        required
+      >
         <option value="" disabled selected>انتخاب کن</option>
         <option>آنلاین</option>
         <option>خصوصی (حضوری)</option>
@@ -455,15 +486,24 @@ footer{
 
     <div class="field">
       <label for="msg">پیام (اختیاری)</label>
-      <textarea id="msg" placeholder="هر چیزی که بخوای بگی..."></textarea>
+      <textarea
+        id="msg"
+        name="پیام"
+        placeholder="هر چیزی که بخوای بگی..."
+      ></textarea>
     </div>
 
-    <button class="btn-submit" id="submitBtn" onclick="send()">ارسال و ثبت‌نام ←</button>
-    <div class="success" id="ok">✓ پیامت ثبت شد. به زودی باهات تماس می‌گیریم!</div>
-  </div>
+    <button class="btn-submit" id="submitBtn" type="submit">
+      ارسال و ثبت‌نام ←
+    </button>
 
+    <div class="success" id="ok">
+      ✓ پیامت ثبت شد. به زودی باهات تماس می‌گیریم!
+    </div>
+
+  </form>
 </div>
-
+  
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">NIGAR KAMALI</div>
@@ -471,17 +511,56 @@ footer{
 </footer>
 
 <script>
-function send(){
-  const n=document.getElementById('name').value.trim();
-  const p=document.getElementById('phone').value.trim();
-  const g=document.getElementById('grade').value;
-  const c=document.getElementById('course').value;
-  const t=document.getElementById('type').value;
-  if(!n||!p||!g||!c||!t){alert('لطفاً تمامی فیلدهای ضروری را پر کنید.');return;}
-  const btn=document.getElementById('submitBtn');
-  btn.disabled=true;btn.textContent='ارسال شد ✓';
-  document.getElementById('ok').style.display='block';
-}
+const form = document.getElementById('contactForm');
+const btn = document.getElementById('submitBtn');
+const success = document.getElementById('ok');
+
+form.addEventListener('submit', async function(e){
+
+  const n = document.getElementById('name').value.trim();
+  const p = document.getElementById('phone').value.trim();
+  const g = document.getElementById('grade').value;
+  const c = document.getElementById('course').value;
+  const t = document.getElementById('type').value;
+
+  if(!n || !p || !g || !c || !t){
+    e.preventDefault();
+    alert('لطفاً تمامی فیلدهای ضروری را پر کنید.');
+    return;
+  }
+
+  e.preventDefault();
+
+  btn.disabled = true;
+  btn.textContent = 'در حال ارسال...';
+
+  const data = new FormData(form);
+
+  try{
+    const response = await fetch(form.action,{
+      method:'POST',
+      body:data,
+      headers:{
+        'Accept':'application/json'
+      }
+    });
+
+    if(response.ok){
+      success.style.display = 'block';
+      form.reset();
+      btn.textContent = 'ارسال شد ✓';
+    }else{
+      alert('خطا در ارسال فرم. دوباره تلاش کنید.');
+      btn.disabled = false;
+      btn.textContent = 'ارسال و ثبت‌نام ←';
+    }
+
+  }catch(error){
+    alert('خطا در اتصال. دوباره تلاش کنید.');
+    btn.disabled = false;
+    btn.textContent = 'ارسال و ثبت‌نام ←';
+  }
+});
 </script>
 </body>
 </html>
