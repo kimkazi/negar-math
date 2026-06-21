@@ -88,8 +88,8 @@ nav{
   position:relative;
   min-height:100svh;
   display:flex;flex-direction:column;
-  justify-content:flex-end;
-  padding:0 48px 80px;
+  justify-content:center;
+  padding:140px 48px 100px;
   overflow:hidden;
 }
 /* grid canvas */
@@ -220,12 +220,21 @@ nav{
   padding:18px 0;
   white-space:nowrap;
   background:rgba(108,92,231,0.04);
+  direction:ltr;
 }
-.strip-inner{
+.strip-track{
+  display:inline-flex;align-items:center;gap:0;
+  animation:marquee-rtl 32s linear infinite;
+  will-change:transform;
+}
+.strip-set{
   display:inline-flex;align-items:center;gap:48px;
-  animation:marquee 22s linear infinite;
+  padding-left:48px;
 }
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes marquee-rtl{
+  0%  {transform:translateX(-50%)}
+  100%{transform:translateX(0)}
+}
 .strip-item{
   font-size:0.75rem;font-weight:600;
   color:rgba(255,255,255,0.3);
@@ -549,7 +558,7 @@ footer{
 /* ── RESPONSIVE ──────────────────────────────── */
 @media(max-width:900px){
   nav{padding:0 24px}
-  .hero{padding:0 24px 64px}
+  .hero{padding:120px 24px 80px}
   .section{padding:80px 24px}
   .about-inner{grid-template-columns:1fr}
   .about-left{border-right:none;border-bottom:1px solid var(--line);padding:48px 24px}
@@ -597,7 +606,7 @@ footer{
       آنلاین، خصوصی یا گروهی — هر طور که راحتی.
     </p>
     <div class="hero-actions">
-      <a href="contact.html" class="btn-main">همین الان ثبت‌نام کن ←</a>
+      <a href="contact.html" class="btn-main">همین الان ثبت‌نام کن</a>
       <a href="#classes" class="btn-ghost">کلاس‌ها رو ببین ↓</a>
     </div>
   </div>
@@ -609,22 +618,33 @@ footer{
 
 <!-- ═══ MARQUEE ═══ -->
 <div class="strip">
-  <div class="strip-inner">
-    <span class="strip-item"><span class="strip-dot"></span>ریاضی ۱ · ۲ · ۳</span>
-    <span class="strip-item"><span class="strip-dot"></span>حسابان ۱ · ۲</span>
-    <span class="strip-item"><span class="strip-dot"></span>هندسه ۱ · ۲ · ۳</span>
-    <span class="strip-item"><span class="strip-dot"></span>کلاس آنلاین</span>
-    <span class="strip-item"><span class="strip-dot"></span>کلاس خصوصی</span>
-    <span class="strip-item"><span class="strip-dot"></span>کلاس گروهی</span>
-    <span class="strip-item"><span class="strip-dot"></span>امتحانات نهایی ۱۴۰۴</span>
-    <!-- dup for seamless loop -->
-    <span class="strip-item"><span class="strip-dot"></span>ریاضی ۱ · ۲ · ۳</span>
-    <span class="strip-item"><span class="strip-dot"></span>حسابان ۱ · ۲</span>
-    <span class="strip-item"><span class="strip-dot"></span>هندسه ۱ · ۲ · ۳</span>
-    <span class="strip-item"><span class="strip-dot"></span>کلاس آنلاین</span>
-    <span class="strip-item"><span class="strip-dot"></span>کلاس خصوصی</span>
-    <span class="strip-item"><span class="strip-dot"></span>کلاس گروهی</span>
-    <span class="strip-item"><span class="strip-dot"></span>امتحانات نهایی ۱۴۰۴</span>
+  <div class="strip-track">
+    <!-- set A -->
+    <div class="strip-set">
+      <span class="strip-item"><span class="strip-dot"></span>ریاضی ۱ · ۲ · ۳</span>
+      <span class="strip-item"><span class="strip-dot"></span>حسابان ۱ · ۲</span>
+      <span class="strip-item"><span class="strip-dot"></span>هندسه ۱ · ۲ · ۳</span>
+      <span class="strip-item"><span class="strip-dot"></span>کلاس آنلاین</span>
+      <span class="strip-item"><span class="strip-dot"></span>کلاس خصوصی</span>
+      <span class="strip-item"><span class="strip-dot"></span>کلاس گروهی</span>
+      <span class="strip-item"><span class="strip-dot"></span>امتحانات نهایی ۱۴۰۴</span>
+      <span class="strip-item"><span class="strip-dot"></span>ریاضی ۱ · ۲ · ۳</span>
+      <span class="strip-item"><span class="strip-dot"></span>حسابان ۱ · ۲</span>
+      <span class="strip-item"><span class="strip-dot"></span>هندسه ۱ · ۲ · ۳</span>
+    </div>
+    <!-- set B — exact clone for seamless loop -->
+    <div class="strip-set">
+      <span class="strip-item"><span class="strip-dot"></span>ریاضی ۱ · ۲ · ۳</span>
+      <span class="strip-item"><span class="strip-dot"></span>حسابان ۱ · ۲</span>
+      <span class="strip-item"><span class="strip-dot"></span>هندسه ۱ · ۲ · ۳</span>
+      <span class="strip-item"><span class="strip-dot"></span>کلاس آنلاین</span>
+      <span class="strip-item"><span class="strip-dot"></span>کلاس خصوصی</span>
+      <span class="strip-item"><span class="strip-dot"></span>کلاس گروهی</span>
+      <span class="strip-item"><span class="strip-dot"></span>امتحانات نهایی ۱۴۰۴</span>
+      <span class="strip-item"><span class="strip-dot"></span>ریاضی ۱ · ۲ · ۳</span>
+      <span class="strip-item"><span class="strip-dot"></span>حسابان ۱ · ۲</span>
+      <span class="strip-item"><span class="strip-dot"></span>هندسه ۱ · ۲ · ۳</span>
+    </div>
   </div>
 </div>
 
@@ -715,7 +735,7 @@ footer{
       <span class="group-name">حسابان</span>
       <div class="group-line"></div>
     </div>
-    <div class="cards-row two" style="max-width:68%;margin:0 auto">
+    <div class="cards-row two">
       <div class="card c">
         <span class="card-num">07</span>
         <div class="card-bottom">
