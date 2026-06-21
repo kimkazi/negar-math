@@ -18,4 +18,4 @@ A modern portfolio website for a mathematics teacher.
 
 ## Live Demo
 
-https://username.github.io/math-teacher-portfolio/
+https://kimkazi.github.io/math-teacher-portfolio/
