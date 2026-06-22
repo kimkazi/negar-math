@@ -147,7 +147,7 @@ nav{
 }
 .hero-sub{
   max-width:520px;
-  font-size:clamp(0.95rem,1.6vw,1.1rem);
+  font-size:clamp(1.05rem,1.8vw,1.2rem);
   font-weight:400;
   line-height:1.9;
   color:rgba(255,255,255,0.52);
@@ -849,8 +849,8 @@ footer{
     const offsetX = (mx / W - 0.5) * SPACING * 0.4;
     const offsetY = (my / H - 0.5) * SPACING * 0.4;
 
-    ctx.strokeStyle = 'rgba(108,92,231,0.18)';
-    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = 'rgba(108,92,231,0.28)';
+    ctx.lineWidth = 0.7;
 
     // vertical lines
     for(let x = (offsetX % SPACING); x < W; x += SPACING){
@@ -862,14 +862,20 @@ footer{
     }
 
     // dot at intersections near mouse
-    const r2 = 160*160;
+    const RADIUS = 200;
+    const r2 = RADIUS*RADIUS;
     for(let x = (offsetX % SPACING); x < W; x += SPACING){
       for(let y = (offsetY % SPACING); y < H; y += SPACING){
         const dx=x-mx,dy=y-my;
-        if(dx*dx+dy*dy < r2){
-          const a = 1-(Math.sqrt(dx*dx+dy*dy)/160);
-          ctx.fillStyle = `rgba(139,127,240,${a*0.6})`;
-          ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fill();
+        const dist2=dx*dx+dy*dy;
+        if(dist2 < r2){
+          const a = 1-(Math.sqrt(dist2)/RADIUS);
+          // outer glow ring
+          ctx.shadowColor = `rgba(139,127,240,${a*0.9})`;
+          ctx.shadowBlur = 8;
+          ctx.fillStyle = `rgba(179,167,255,${a*0.95})`;
+          ctx.beginPath();ctx.arc(x,y,a*3+1,0,Math.PI*2);ctx.fill();
+          ctx.shadowBlur = 0;
         }
       }
     }
