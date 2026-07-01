@@ -42,27 +42,32 @@ nav{
   background:rgba(12,12,14,0.85);
   backdrop-filter:blur(16px);
 }
+
 .nav-logo{
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-size:1rem;font-weight:800;
+  font-family:'Vazirmatn',sans-serif;
+  font-size:1.2rem;font-weight:750;
   letter-spacing:0.04em;
+  color:var(--white);
   display:flex;align-items:center;gap:10px;
 }
+
 .nav-logo::before{
   content:'';display:inline-block;
   width:8px;height:8px;border-radius:50%;
   background:var(--v);
 }
-.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links{display:flex;align-items:center;
+  gap:36px;list-style:none}
+  
 .nav-links a{
-  font-size:0.82rem;font-weight:500;
+  font-size:0.9rem;font-weight:500;
   color:var(--muted);letter-spacing:0.06em;
   transition:color .2s;
 }
 .nav-links a:hover{color:var(--white)}
 .nav-back{
   display:inline-flex;align-items:center;gap:6px;
-  font-size:0.82rem;font-weight:500;
+  font-size:0.9rem;font-weight:500;
   color:var(--muted);
   transition:color .2s;
 }
@@ -109,7 +114,7 @@ nav{
 .info-h1{
   font-size:clamp(2rem,4vw,3.2rem);
   font-weight:900;
-  line-height:1.1;
+  line-height:1.15;
   letter-spacing:-0.02em;
   color:var(--white);
   margin-bottom:20px;
@@ -209,7 +214,7 @@ nav{
 .form-h2{
   font-size:clamp(1.5rem,2.5vw,2.2rem);
   font-weight:900;
-  line-height:1.1;
+  line-height:1.15;
   letter-spacing:-0.02em;
   color:var(--white);
   margin-bottom:8px;
