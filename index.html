@@ -112,13 +112,52 @@ nav{
 }
 .hero-content{
   position:relative;z-index:2;
-  max-width:900px;
+  display:flex;
+  align-items:center;
+  gap:56px;
+}
+.hero-main{
+  flex:1;
+}
+/* سه کلمه سمت چپ */
+.hero-keywords{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+  position:relative;
+  flex-shrink:0;
+  opacity:0;
+  animation:fadeUp .9s var(--ease) .65s forwards;
+}
+.hero-kw{
+  position:relative;
+  font-size:1.15rem;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:0.04em;
+  padding:18px 0 18px 24px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  white-space:nowrap;
+}
+.hero-kw::before{
+  content:'';
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--v2);
+  box-shadow:0 0 10px 3px rgba(139,127,240,0.5);
+  flex-shrink:0;
+}
+.hero-kw span{
+  text-shadow:0 0 20px rgba(108,92,231,0.4);
 }
 .hero-tag{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:0.72rem;font-weight:600;
+  font-size:0.82rem;font-weight:600;
   color:var(--v2);
-  letter-spacing:0.18em;
+  letter-spacing:0.13em;
   text-transform:uppercase;
   margin-bottom:32px;
   opacity:0;
@@ -147,7 +186,7 @@ nav{
 }
 .hero-sub{
   max-width:520px;
-  font-size:clamp(1.05rem,1.8vw,1.2rem);
+  font-size:clamp(0.95rem,1.6vw,1.1rem);
   font-weight:400;
   line-height:1.9;
   color:rgba(255,255,255,0.52);
@@ -237,9 +276,9 @@ nav{
   100%{transform:translateX(0)}
 }
 .strip-item{
-  font-size:0.75rem;font-weight:600;
+  font-size:0.82rem;font-weight:600;
   color:rgba(255,255,255,0.3);
-  letter-spacing:0.2em;text-transform:uppercase;
+  letter-spacing:0.13em;text-transform:uppercase;
   display:flex;align-items:center;gap:16px;
 }
 .strip-dot{width:4px;height:4px;border-radius:50%;background:var(--v);flex-shrink:0}
@@ -255,9 +294,9 @@ nav{
   flex-wrap:wrap;
 }
 .sec-label{
-  font-size:0.72rem;font-weight:600;
+  font-size:0.82rem;font-weight:600;
   color:var(--v2);
-  letter-spacing:0.2em;text-transform:uppercase;
+  letter-spacing:0.13em;text-transform:uppercase;
   margin-bottom:16px;
   display:flex;align-items:center;gap:10px;
 }
@@ -287,8 +326,8 @@ nav{
   width:10px;height:10px;border-radius:50%;flex-shrink:0;
 }
 .group-name{
-  font-size:0.72rem;font-weight:700;
-  letter-spacing:0.2em;text-transform:uppercase;
+  font-size:0.82rem;font-weight:700;
+  letter-spacing:0.13em;text-transform:uppercase;
   color:var(--muted);
 }
 .group-line{
@@ -334,8 +373,8 @@ nav{
 
 .card-num{
   font-family:'Bricolage Grotesque',sans-serif;
-  font-size:0.7rem;font-weight:800;
-  letter-spacing:0.16em;
+  font-size:0.78rem;font-weight:800;
+  letter-spacing:0.11em;
   color:rgba(255,255,255,0.18);
   margin-bottom:auto;
 }
@@ -423,9 +462,9 @@ nav{
 }
 .about-eyebrow{
   display:inline-flex;align-items:center;gap:10px;
-  font-size:0.7rem;font-weight:600;
+  font-size:0.82rem;font-weight:600;
   color:var(--v2);
-  letter-spacing:0.18em;text-transform:uppercase;
+  letter-spacing:0.13em;text-transform:uppercase;
   margin-bottom:28px;
 }
 .about-eyebrow::before{
@@ -560,6 +599,10 @@ footer{
 @media(max-width:900px){
   nav{padding:0 24px}
   .hero{padding:120px 24px 80px}
+  .hero-content{flex-direction:column;align-items:flex-start;gap:32px}
+  .hero-keywords{flex-direction:row;width:100%;justify-content:flex-start;gap:8px}
+  .hero-keywords::before{display:none}
+  .hero-kw{padding:10px 16px;border:1px solid rgba(108,92,231,0.25);border-radius:50px;font-size:0.95rem}
   .section{padding:80px 24px}
   .about-inner{grid-template-columns:1fr}
   .about-left{border-right:none;border-bottom:1px solid var(--line);padding:48px 24px}
@@ -600,15 +643,21 @@ footer{
   <canvas id="gridCanvas"></canvas>
   <div class="hero-glow"></div>
   <div class="hero-content">
-    <div class="hero-tag">دوره فشرده امتحانات نهایی 1405</div>
-    <h1 class="hero-h1">یه قدم<br/><em>قدرتمند</em><br/>تا نهایی</h1>
-    <p class="hero-sub">
-      تدریس تخصصی ریاضی، حسابان و هندسه مخصوص امتحانات نهایی 1405.<br/>
-      آنلاین، خصوصی یا گروهی — هر طور که راحتی.
-    </p>
-    <div class="hero-actions">
-      <a href="contact.html" class="btn-main">همین الان ثبت‌نام کن</a>
-      <a href="#classes" class="btn-ghost">کلاس‌ها رو ببین ↓</a>
+    <div class="hero-main">
+      <div class="hero-tag">دوره فشرده امتحانات نهایی 1405</div>
+      <h1 class="hero-h1">یه قدم<br/><em>قدرتمند</em><br/>تا نهایی</h1>
+      <p class="hero-sub">
+        تدریس تخصصی ریاضی، حسابان و هندسه مخصوص امتحانات نهایی 1405.
+      </p>
+      <div class="hero-actions">
+        <a href="contact.html" class="btn-main">همین الان ثبت‌نام کن</a>
+        <a href="#classes" class="btn-ghost">کلاس‌ها رو ببین ↓</a>
+      </div>
+    </div>
+    <div class="hero-keywords">
+      <div class="hero-kw"><span>آنلاین</span></div>
+      <div class="hero-kw"><span>خصوصی</span></div>
+      <div class="hero-kw"><span>گروهی</span></div>
     </div>
   </div>
   <div class="hero-scroll">
@@ -826,56 +875,75 @@ footer{
 (function(){
   const canvas = document.getElementById('gridCanvas');
   const ctx = canvas.getContext('2d');
-  let W,H,mx=0,my=0;
+  let W,H;
+  let tx=0,ty=0;   // target (raw mouse)
+  let mx=0,my=0;   // smoothed position
+  let glowAlpha=0; // 0=invisible 1=full
+  let isMoving=false;
+  let idleTimer=null;
 
   function resize(){
     W = canvas.width  = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
+    tx=mx=W/2; ty=my=H/2;
   }
   resize();
   window.addEventListener('resize',resize);
 
   document.querySelector('.hero').addEventListener('mousemove',e=>{
-    const r = canvas.getBoundingClientRect();
-    mx = e.clientX - r.left;
-    my = e.clientY - r.top;
+    const r=canvas.getBoundingClientRect();
+    tx=e.clientX-r.left;
+    ty=e.clientY-r.top;
+    isMoving=true;
+    clearTimeout(idleTimer);
+    idleTimer=setTimeout(()=>{ isMoving=false; },130);
   });
 
-  const SPACING = 60;
+  const SPACING=60;
 
   function draw(){
+    // lerp mouse position — smooth follow
+    mx+=(tx-mx)*0.07;
+    my+=(ty-my)*0.07;
+
+    // fade glow in when moving, out when idle
+    if(isMoving){ glowAlpha=Math.min(1, glowAlpha+0.06); }
+    else         { glowAlpha=Math.max(0, glowAlpha-0.02); }
+
     ctx.clearRect(0,0,W,H);
 
-    const offsetX = (mx / W - 0.5) * SPACING * 0.4;
-    const offsetY = (my / H - 0.5) * SPACING * 0.4;
+    const offsetX=(mx/W-0.5)*SPACING*0.4;
+    const offsetY=(my/H-0.5)*SPACING*0.4;
 
-    ctx.strokeStyle = 'rgba(108,92,231,0.28)';
-    ctx.lineWidth = 0.7;
-
-    // vertical lines
-    for(let x = (offsetX % SPACING); x < W; x += SPACING){
+    // grid lines
+    ctx.strokeStyle='rgba(108,92,231,0.28)';
+    ctx.lineWidth=0.7;
+    for(let x=(offsetX%SPACING);x<W;x+=SPACING){
       ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();
     }
-    // horizontal lines
-    for(let y = (offsetY % SPACING); y < H; y += SPACING){
+    for(let y=(offsetY%SPACING);y<H;y+=SPACING){
       ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
     }
 
-    // dot at intersections near mouse
-    const RADIUS = 200;
-    const r2 = RADIUS*RADIUS;
-    for(let x = (offsetX % SPACING); x < W; x += SPACING){
-      for(let y = (offsetY % SPACING); y < H; y += SPACING){
-        const dx=x-mx,dy=y-my;
-        const dist2=dx*dx+dy*dy;
-        if(dist2 < r2){
-          const a = 1-(Math.sqrt(dist2)/RADIUS);
-          // outer glow ring
-          ctx.shadowColor = `rgba(139,127,240,${a*0.9})`;
-          ctx.shadowBlur = 8;
-          ctx.fillStyle = `rgba(179,167,255,${a*0.95})`;
-          ctx.beginPath();ctx.arc(x,y,a*3+1,0,Math.PI*2);ctx.fill();
-          ctx.shadowBlur = 0;
+    // glowing dots — only when glowAlpha > 0
+    if(glowAlpha>0.01){
+      const RADIUS=200;
+      const r2=RADIUS*RADIUS;
+      for(let x=(offsetX%SPACING);x<W;x+=SPACING){
+        for(let y=(offsetY%SPACING);y<H;y+=SPACING){
+          const dx=x-mx, dy=y-my;
+          const dist2=dx*dx+dy*dy;
+          if(dist2<r2){
+            const prox=1-(Math.sqrt(dist2)/RADIUS);
+            const a=prox*glowAlpha;
+            ctx.shadowColor=`rgba(139,127,240,${a*0.85})`;
+            ctx.shadowBlur=10;
+            ctx.fillStyle=`rgba(185,172,255,${a*0.95})`;
+            ctx.beginPath();
+            ctx.arc(x,y,prox*3+1,0,Math.PI*2);
+            ctx.fill();
+            ctx.shadowBlur=0;
+          }
         }
       }
     }
